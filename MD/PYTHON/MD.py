@@ -14,7 +14,7 @@ import math
 import scipy.special
 import datetime
 import time
-np.set_printoptions(threshold=np.nan)
+np.set_printoptions(threshold=sys.maxsize)
 
 
 

@@ -17,7 +17,7 @@ import datetime
 import random
 import mdfun
 import time
-np.set_printoptions(threshold=np.nan)
+np.set_printoptions(threshold=sys.maxsize)
 
 
 def main():

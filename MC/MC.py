@@ -4,7 +4,7 @@
 import numpy, math, pylab, datetime, random
 #-------------------------------------------------------------------
 #Setting parameters
-position = input("Random generation of lattice initial position (random/lattice): ")
+position = input("Random or lattice initial position (random/lattice): ")
 pos = []
 PE = []
 sigma = 1.0                     #sigma value dimensionless
