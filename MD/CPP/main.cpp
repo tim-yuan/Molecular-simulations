@@ -123,7 +123,7 @@ int main()
     double Temp;
     double Up_pres[2]={0,0};
     double dt=0.0005;
-    int nsteps=100000 ;
+    int nsteps=1000 ;
     double mass = 1.0;
     double Kb = 1.0;
 //    if (argv[3] !=NULL)
@@ -181,11 +181,11 @@ int main()
     }
 
     t1=clock();
-    for (int i=0; i<nsteps; i++)
+    for (int j=0; j<nsteps; j++)
     {
-        if (i%2000==0)
+        if (j%2000==0)
         {
-            cout<<"Number of steps to finish is: "<<(nsteps-i)<<endl;
+            cout<<"Number of steps to finish is: "<<(nsteps-j)<<endl;
         }
 
 //----------------------------------------------------------------------------------------
@@ -242,7 +242,7 @@ int main()
             KE_i= (par_fun[i][3]*par_fun[i][3]+par_fun[i][4]*par_fun[i][4]+par_fun[i][5]*par_fun[i][5])/2.0;
             KE += KE_i;
         }
-        enefile<<fixed<<setprecision(8)<<i<<"\t"<<Up_pres[0]<<"\t"<<Up_pres[1]<<"\t"<<KE<<"\t"<<KE+Up_pres[0]<<"\t"<<Temp<<endl;
+        enefile<<fixed<<setprecision(8)<<j<<"\t"<<Up_pres[0]<<"\t"<<Up_pres[1]<<"\t"<<KE<<"\t"<<KE+Up_pres[0]<<"\t"<<Temp<<endl;
 
 
         xyzfile <<n<<"\n"<<"\n";
