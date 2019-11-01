@@ -176,33 +176,33 @@ Cf2py intent(out,copy) update
         end
 
 !-------------------------------------------------------------------------
-!subroutine velocity autocorrelation function 
+!subroutine velocity autocorrelation function (in progress)
 !-------------------------------------------------------------------------
-!This is the program for Velocity autocorrellation function
-        subroutine autocor(pos,posi,gam,Kb,Temp,
-     &  mass,stepnumber,timestep,vacor,alyacor,n)
-        real*8 pos(n,6),posi(n,6)
-        integer :: n,i
-        real*8 :: timestep,gam,Kb,Temp,mass,stepnumber
-        real*8 :: vv,vvnorm,vafxx,vafyy,vafzz,vacor,alyacor
-Cf2py intent(out,copy) vacor,alyacor
-        vv=0.0
-        vvnorm=0.0
-        do i = 1,n
-            vafxx=pos(i,4)*posi(i,4)
-            vafyy=pos(i,5)*posi(i,5)
-            vafzz=pos(i,6)*posi(i,6)
-            vv= vv+vafxx+vafyy+vafzz
-            vvnorm=vvnorm+posi(i,4)**2+posi(i,5)**2+posi(i,6)**2
-!I used a normalising factor which is the initial velocity squared
-        end do
-        vacor=vv/vvnorm
-        alyacor=(3d0*n*Kb*Temp/mass)*dexp(-gam*
-     &  dabs(stepnumber*timestep))/vvnorm
-!alyacor is the analitical solution, and normalized 
-!by initial velocity squred
-!I time 3 here because 1/2m*v**2 = 3/2Kb*T
-        end
+!!This is the program for Velocity autocorrellation function
+!        subroutine autocor(pos,posi,gam,Kb,Temp,
+!     &  mass,stepnumber,timestep,vacor,alyacor,n)
+!        real*8 pos(n,6),posi(n,6)
+!        integer :: n,i
+!        real*8 :: timestep,gam,Kb,Temp,mass,stepnumber
+!        real*8 :: vv,vvnorm,vafxx,vafyy,vafzz,vacor,alyacor
+!Cf2py intent(out,copy) vacor,alyacor
+!        vv=0.0
+!        vvnorm=0.0
+!        do i = 1,n
+!            vafxx=pos(i,4)*posi(i,4)
+!            vafyy=pos(i,5)*posi(i,5)
+!            vafzz=pos(i,6)*posi(i,6)
+!            vv= vv+vafxx+vafyy+vafzz
+!            vvnorm=vvnorm+posi(i,4)**2+posi(i,5)**2+posi(i,6)**2
+!!I used a normalising factor which is the initial velocity squared
+!        end do
+!        vacor=vv/vvnorm
+!        alyacor=(3d0*n*Kb*Temp/mass)*dexp(-gam*
+!     &  dabs(stepnumber*timestep))/vvnorm
+!!alyacor is the analitical solution, and normalized 
+!!by initial velocity squred
+!!I time 3 here because 1/2m*v**2 = 3/2Kb*T
+!        end
 !-------------------------------------------------------------------------
 !subroutine force +acc calculation
 !-------------------------------------------------------------------------

@@ -63,7 +63,7 @@ or
 for more information
 
 ###########################################
-#           MD with CPP                   #
+#     MD with CPP (work in progress)      #
 ###########################################
 Type 
 

@@ -231,8 +231,6 @@ int main()
             acc2[i][2]=acc[i][2];
 //            printf("%f\t %f \t %f \n", acc2[i][0],acc2[i][1],acc2[i][2]);
         }    
-        KE=KE*mass;
-        Temp = 2.0*KE/(3.0*n*Kb);
         acc_cal(n,par_fun,list,point,rcut,eps,sigma,acc,xx,yy,zz,Up_pres);
         vel_ver2(par_fun, acc, acc2, dt, n);
 //        printf("%f\t %f \t %f \n", Up_pres[0], KE, KE+Up_pres[0]);
@@ -242,6 +240,8 @@ int main()
             KE_i= (par_fun[i][3]*par_fun[i][3]+par_fun[i][4]*par_fun[i][4]+par_fun[i][5]*par_fun[i][5])/2.0;
             KE += KE_i;
         }
+        KE=KE*mass;
+        Temp = 2.0*KE/(3.0*n*Kb);
         enefile<<fixed<<setprecision(8)<<j<<"\t"<<Up_pres[0]<<"\t"<<Up_pres[1]<<"\t"<<KE<<"\t"<<KE+Up_pres[0]<<"\t"<<Temp<<endl;
 
 
