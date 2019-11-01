@@ -203,6 +203,38 @@ Cf2py intent(out,copy) update
 !!by initial velocity squred
 !!I time 3 here because 1/2m*v**2 = 3/2Kb*T
 !        end
+
+!-------------------------------------------------------------------------
+!subroutine velocity autocorrelation function (in progress)
+!-------------------------------------------------------------------------
+!This is the program for Velocity autocorrellation function
+        subroutine autocor(pos,vel_rec, vacf_rec, vacf_norm
+     &  ,current_step, n, nstep)
+        real*8 ::  pos(n,6)
+        real*8 ::  vel_rec(nstep, n, 3)
+        real*8 ::  vacf_rec(nstep), vacf_norm(nstep)
+        integer :: n, nstep, i, j, current_step
+Cf2py intent(in,out, copy) vel_rec, vacf_rec, vacf_norm
+Cf2py intent(in) pos, current_step, n, nstep
+        do i = 1, n
+            vel_rec(current_step,i,1) = pos(i, 4)
+            vel_rec(current_step,i,2) = pos(i, 5)
+            vel_rec(current_step,i,3) = pos(i, 6)
+        end do
+        do i = 1, current_step
+            do j = 1, n
+                vacf_rec(current_step) = vacf_rec(current_step) +
+     &                            vel_rec(1,j,1)*vel_rec(i,j,1) +
+     &                            vel_rec(1,j,2)*vel_rec(i,j,2) +
+     &                            vel_rec(1,j,3)*vel_rec(i,j,3)
+                vacf_norm(current_step) = vacf_norm(current_step) + 1
+!                print*,vel_rec(i, j, 1)
+            end do
+        end do
+        end
+
+
+
 !-------------------------------------------------------------------------
 !subroutine force +acc calculation
 !-------------------------------------------------------------------------

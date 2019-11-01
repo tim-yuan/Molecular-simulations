@@ -36,7 +36,7 @@ def main():
     f_ener = args.energyfile
     tset = args.tset
     thermo=args.thermo
-
+    vacf = args.vacffile
 #    pos_vec=[]
     mass=1.0
     Kb=1.0
@@ -78,6 +78,10 @@ def main():
     fener=open(f_ener,'w')
     fener.write("{:<25s}{:<25s}{:<25s}{:<13s}{:<25s}{:<10s}\n".format("Potential E",\
              "Kinetic E", "Total E", "Tempearture","Pressure","Nlist update"))
+    if vacf != None:
+        vel_rec = np.zeros((int(nstep),int(n),3 ), order = 'F')
+        vacf_rec = np.zeros(int(nstep), order = 'F')
+        vacf_norm = np.zeros(int(nstep), order = 'F')
 
     nlist_update=0
     neilist, point = mdfun.neilist(pos, boxdim, rneigh,distan)
@@ -145,6 +149,11 @@ def main():
             pos[k][1] = pos[k][1] - math.floor(pos[k][1]/boxdim[1])*boxdim[1]
             pos[k][2] = pos[k][2] - math.floor(pos[k][2]/boxdim[2])*boxdim[2]
             fxyz.write('LJP' + ' ' + str(pos[k][0]) + ' ' +str(pos[k][1]) + ' ' + str(pos[k][2]) + '\n')
+        #velocity autocorrelation function
+        if vacf != None:
+            nframe=i+1
+            vel_rec, vacf_rec, vacf_norm = mdfun.autocor(pos, vel_rec, vacf_rec, vacf_norm, nframe, n, nstep)
+
         #Pressure calculation
         Pcc =  16*3*math.pi*(n/V)*eps*sigma**3 *(2/3*(sigma/rcut)**9 - (sigma/rcut)**3) #pressure correction
         P = (n*Kb*Temp +w)/(V) + Pcc #pressure calculated with correction
@@ -153,6 +162,11 @@ def main():
     #close the file handle
     fxyz.close()
     fener.close()
+    if vacf != None:
+        fvacf=open(vacf,'w')
+        for i in range(nstep):
+            fvacf.write("{:13.5f}{:13.5f}\n".format(i,  vacf_rec[i]/vacf_norm[i]))
+        fvacf.close()
     end = time.time()
     print("The runing time is "+str(end - start)+" s")
 
@@ -186,6 +200,9 @@ def parseargs():
                         "la for Langevin, and dpd for dissipative particle dynamics."\
                         "The default is Berendsen",
                         default="br", metavar='')
+    parser.add_argument("-vacf", "--vacffile", help="specify the name of the energy (output) file",
+                        default=None, metavar='')
+
 
 
     args = parser.parse_args()
