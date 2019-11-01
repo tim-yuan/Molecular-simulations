@@ -1,15 +1,18 @@
 # Molecular-simulations
 
 ##     Generate initial position           
+
 ```
 python gen-pos.py
 ```
-    This commend will generate a 8x8x8 box with 500 LJ particles
+
+This commend will generate a 8x8x8 box with 500 LJ particles
 
 ```
 python gen-pos.py -h
 ```
-    This will help you generate the configurations you want
+
+This will help you generate the configurations you want
 
 
 ##           Energy Minimization           
