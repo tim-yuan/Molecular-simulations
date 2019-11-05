@@ -40,7 +40,7 @@ def main():
 #    pos_vec=[]
     mass=1.0
     Kb=1.0
-    rcut = 3*sigma
+    rcut = 3.5*sigma
     rcut2 = rcut**2
     rskin = sigma
     rneigh = rcut+rskin
@@ -156,7 +156,8 @@ def main():
 
         #Pressure calculation
         Pcc =  16*3*math.pi*(n/V)*eps*sigma**3 *(2/3*(sigma/rcut)**9 - (sigma/rcut)**3) #pressure correction
-        P = (n*Kb*Temp +w)/(V) + Pcc #pressure calculated with correction
+#        P = (n*Kb*Temp - w*2/3)/(V) + Pcc #pressure calculated with correction
+        P = (2*(KE - w)/(3*V))*(100)/6.02 #calculate the pressure and convert it to bar
 #         ET = Up + KE
         fener.write("{:<25.7f}{:<25.7f}{:<25.7f}{:<13.2f}{:<25.7f}{:<10d}\n".format(Up, KE, ET, Temp,P,nlist_update))
     #close the file handle

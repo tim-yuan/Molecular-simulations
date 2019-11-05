@@ -301,7 +301,7 @@ Cf2py intent(in) rcut, eps, sigma
             end do
         end do
 !This is very important because we only looped from 1-(n-1)!
-        w = (wx+wy+wz)/3d0
+        w = -(wx+wy+wz)/2d0
         end
 !
 !-------------------------------------------------------------------------
@@ -378,11 +378,13 @@ Cf2py intent(in) pos,rcut, eps,sigma,  neilist,point
                         wx = wx+wx_i
                         wy = wy+wy_i
                         wz = wz+wz_i
+!                        w = w + (3d0*4d0*eps*(sigma**(6d0))
+!     &*(dis2**(-3d0)))
                     endif
                 end do
             endif
         end do
-        w = (wx+wy+wz)/3d0
+        w = -(wx+wy+wz)/2  ! - 1/2 * F (dot) r !
         end
  
 
@@ -476,7 +478,7 @@ Cf2py intent(in) pos,rcut, eps,sigma,mass, gam, neilist,point
         force(n,1)=force(n,1)-mass*gam*pos(n,4)+nprandor(mean,stdev)
         force(n,2)=force(n,2)-mass*gam*pos(n,5)+nprandor(mean,stdev)
         force(n,3)=force(n,3)-mass*gam*pos(n,6)+nprandor(mean,stdev)
-        w = (wx+wy+wz)/3d0
+        w = -(wx+wy+wz)/2d0
         end
                             
 
@@ -598,7 +600,7 @@ Cf2py intent(in) pos,rcut, eps,sigma, gam, neilist,point
                 end do
             endif
         end do
-        w = (wx+wy+wz)/3d0
+        w = -(wx+wy+wz)/2d0
         end
 
 !-------------------------------------------------------------------------
