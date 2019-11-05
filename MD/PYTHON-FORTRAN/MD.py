@@ -77,7 +77,7 @@ def main():
     fxyz=open(f_out,'w')
     fener=open(f_ener,'w')
     fener.write("{:<25s}{:<25s}{:<25s}{:<13s}{:<25s}{:<10s}\n".format("Potential E",\
-             "Kinetic E", "Total E", "Tempearture","Pressure","Nlist update"))
+             "Kinetic E", "Total E (kJ/mol)", "Tempearture (K)","Pressure (bar)","Nlist update"))
     if vacf != None:
         vel_rec = np.zeros((int(nstep),int(n),3 ), order = 'F')
         vacf_rec = np.zeros(int(nstep), order = 'F')
