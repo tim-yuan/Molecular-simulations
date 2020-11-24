@@ -25,11 +25,11 @@ f2py -c -m EM EM.f
 and you should see a file named "EM...so"
 If you have created an initial configuration using gen-pos.py, type
 ```
-python gen-pos.py -i ../initial.gro
+python EM.py -i ../initial.gro
 ```
 Type
 ```
-python gen-pos.py -h ../initial.gro
+python EM.py -h 
 ```
 for more options
 
