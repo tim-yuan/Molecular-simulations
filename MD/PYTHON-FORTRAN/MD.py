@@ -116,6 +116,10 @@ def main():
             exit()
 #        print("first check") 
         #loop over the steps
+
+    if vacf != None:
+        fanavacf=open(vacf+"analy",'w')
+        fposvel=open("posvel",'w')
     for i in range(nstep):
         if mdfun.check(pos,pos_prev,rskin,boxdim) ==1:
             neilist, point = mdfun.neilist(pos, boxdim, rneigh,distan)
@@ -160,9 +164,15 @@ def main():
         P = (2*(KE - w)/(3*V))*(100)/6.02 #calculate the pressure and convert it to bar
 #         ET = Up + KE
         fener.write("{:<25.7f}{:<25.7f}{:<25.7f}{:<13.2f}{:<25.7f}{:<10d}\n".format(Up, KE, ET, Temp,P,nlist_update))
+        if vacf != None:
+            analyVACF=Kb*Temp/mass*np.exp(-gam*(i*dt))
+            fanavacf.write(str(analyVACF) + '\n')
+            for k in range(n):
+                fposvel.write("{:10d}{:13.5f}{:13.5f}{:13.5f}{:13.5f}{:13.5f}{:13.5f}\n".format(i,pos[k][0],pos[k][1],pos[k][2],pos[k][3],pos[k][4],pos[k][5]))
     #close the file handle
     fxyz.close()
     fener.close()
+    fanavacf.close()
     if vacf != None:
         fvacf=open(vacf,'w')
         for i in range(nstep):
