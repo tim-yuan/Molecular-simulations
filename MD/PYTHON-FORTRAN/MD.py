@@ -172,7 +172,8 @@ def main():
     #close the file handle
     fxyz.close()
     fener.close()
-    fanavacf.close()
+    if vacf != None:
+        fanavacf.close()
     if vacf != None:
         fvacf=open(vacf,'w')
         for i in range(nstep):
