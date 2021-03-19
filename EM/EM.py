@@ -314,8 +314,8 @@ def parseargs():
                         default=0.5,type=float, metavar='')
     parser.add_argument("-nmax", "--nmax", help="Maximimum number of steps for the calculation, default 5,000",
                         default=2000,type=int, metavar='')
-    parser.add_argument("-tol", "--tol", help="Tolerance, default 0.00001",
-                        default=10,type=float, metavar='')
+    parser.add_argument("-tol", "--tol", help="Tolerance, default 500",
+                        default=500,type=float, metavar='')
     parser.add_argument("-alg", "--algorithm", help="pick 'sd' for steepest descent, or 'sd-1'"\
                             " for 1 atom steepest descent, or 'sdrd' for randomly picking"\
                             " x number of particles and perform energy minimization. default sd",
