@@ -251,6 +251,9 @@ Cf2py intent(in) pos, current_step, n, nstep
         real*8 :: dis2,fx_i,fy_i,fz_i,up_i,wx_i,wy_i,wz_i,wx,wy,wz
 Cf2py intent(in, out, copy) force, w, Up
 Cf2py intent(in) rcut, eps, sigma
+        force = 0d0
+        Up = 0d0
+        w = 0d0
         rcut2 = rcut**2
         upcut = (4.d0*eps*((sigma**12.d0)*(rcut2**(-6.d0))-(sigma**6.d0)
      &       *(rcut2**(-3.d0))))
@@ -324,12 +327,7 @@ Cf2py intent(in,out,copy) force,w,Up
 Cf2py intent(in) pos,rcut, eps,sigma,  neilist,point
         Up=0
         w=0
-        do i=1,n
-            force(i,1)=0
-            force(i,2)=0
-            force(i,3)=0
-        end do
-
+        force = 0d0
         rcut2 = rcut**2
         upcut = (4.d0*eps*((sigma**12.d0)*(rcut2**(-6.d0))-(sigma**6.d0)
      &*(rcut2**(-3.d0))))
@@ -417,13 +415,7 @@ Cf2py intent(in) pos,rcut, eps,sigma,mass, gam, neilist,point
         wz = 0
         Up = 0
         w = 0
-
-        do i=1,n
-            force(i,1)=0
-            force(i,2)=0
-            force(i,3)=0
-        end do
-
+        force = 0d0
         do i = 1,(n-1)
             jbeg = point(i)+1
             jend = point(i+1)
@@ -512,13 +504,7 @@ Cf2py intent(in) pos,rcut, eps,sigma, gam, neilist,point
         wz = 0
         Up = 0
         w=0
-
-        do i=1,n
-            force(i,1)=0
-            force(i,2)=0
-            force(i,3)=0
-        end do
-
+        force = 0d0
         do i = 1,(n-1)
             jbeg = point(i)+1
             jend = point(i+1)
